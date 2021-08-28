@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <!-- <link
+      rel='stylesheet'
+      href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
+    /> -->
+    <link
+      rel='stylesheet'
+      href='./assets/css/style.css'
+    />
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <header class='col-12'>
+        <h1 class='text-center'>Weather Dashboard</h1>
+    </header>
+    <main class='container'>
+        <div class='row'>
+            <div class='col-3'>
+                <div class='search-form-container'>
+                    <form id='search-form' class='form-group'>
+                        <div class='form-group'>
+                            <label class='form-label ' for='city'><h2 class='font-weight-bold'>Search for a City:</h2></label>
+                            <input name='city' id='city' type='text' autofocus='true' class='input form-control' placeholder='San Diego' />  
+                        </div>
+                        <button type='submit' class='btn btn-block btn-primary'>Search</button>
+                    </form>
+                </div>
+                <div id='city-buttons'>
+                    <button class='btn btn-block btn-secondary' type='button' data-language="Austin">Austin</button>
+                    <button class='btn btn-block btn-secondary' type='button' data-language="Chicago">Chicago</button>
+                    <button class='btn btn-block btn-secondary' type='button' data-language="New York">New York</button>
+                    <button class='btn btn-block btn-secondary' type='button' data-language="Orlando">Orlando</button>
+                    <button class='btn btn-block btn-secondary' type='button' data-language="San Francisco">San Francisco</button>
+                    <button class='btn btn-block btn-secondary' type='button' data-language="Seattle">Seattle</button>
+                    <button class='btn btn-block btn-secondary' type='button' data-language="Denver">Denver</button>
+                    <button class='btn btn-block btn-secondary' type='button' data-language="Atlanta">Atlanta</button>
+                  </div>
+            </div>
+            <div class='col-9'>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>
