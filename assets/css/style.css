@@ -20,14 +20,14 @@ header {
     margin-bottom: 10px;
 }
 
-#city-search {
+#city-input {
     border-radius: 5px;
     border-width: 1.5px;
     margin: 10px 0;
     font-size: x-large;
 }
 
-#city-search:focus {
+#city-input:focus {
     outline: none;
 }
 
