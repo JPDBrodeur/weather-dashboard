@@ -72,13 +72,26 @@ header {
 }
 
 .col-3 {
-    flex: 0 0 calc(100% * 3 / 12 - 2%);
+    flex: 0 0 calc(100% * 3 / 12);
 }
 
 .col-9 {
-    flex: 0 0 calc(100% * 9 / 12 - 2%);
+    flex: 0 0 calc(100% * 9 / 12);
 }
 
 .p-10 {
     padding: 10px;
+}
+
+article {
+    border: 1px solid #000;
+    margin: 20px;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.absolute-position {
+    position: absolute;
 }
