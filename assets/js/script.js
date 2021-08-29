@@ -1,8 +1,42 @@
 var searchFormEl = document.querySelector('#search-form');
+var previousSearchesEl = document.querySelector('#city-buttons');
 var cityInputEl = document.querySelector('#city-input');
 var resultsContainerEl = document.querySelector('#results');
 
+var loadCities = function() {
+    var lastSearch = localStorage.getItem('last-search');
+    if (lastSearch) {
+        var citiesArray = localStorage.getItem('citiesArray');
+        if (citiesArray) {
+            citiesArray = JSON.parse(citiesArray);
+            var existingButton;
+            for (var i = 0; i < citiesArray.length; i++) {
+                if (citiesArray[i] === lastSearch) {
+                    existingButton = citiesArray[i];
+                    break;
+                }
+            }
+            if (!existingButton) {
+                citiesArray.push(lastSearch)
+            }
+        } else { 
+            citiesArray = [];
+            citiesArray.push(lastSearch)
+        }
+        localStorage.setItem('citiesArray', JSON.stringify(citiesArray));
+        previousSearchesEl.textContent = '';
+        for (var i = 0; i < citiesArray.length; i++) {
+            var cityBtn = document.createElement('button');
+            cityBtn.textContent = citiesArray[i];
+            cityBtn.classList = 'btn previous-search';
+
+            previousSearchesEl.appendChild(cityBtn);
+        }
+    }
+}
+
 var formSubmitHandler = function(event) {
+    // debugger;
     event.preventDefault();
     var city = cityInputEl.value.trim();
     if (city) {
@@ -13,6 +47,14 @@ var formSubmitHandler = function(event) {
     }
 };
 
+var buttonClickHandler = function(event) {
+    if (event.target.type === 'submit') {
+        var city = event.target.textContent;
+        getLatLon(city);
+        cityInputEl.textContent = '';
+    }
+}
+
 var getLatLon = function(city) {
     var apiKey = '0ea17125ef15498e647e96299b01656d';
     var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + apiKey;
@@ -20,6 +62,8 @@ var getLatLon = function(city) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
+                    localStorage.setItem('last-search', data.name)
+                    loadCities();
                     var city = data.name;
                     var lat = data.coord.lat;
                     var lon = data.coord.lon;
@@ -172,4 +216,6 @@ var displayForecast = function(data) {
     resultsContainerEl.appendChild(forecastEl);
 }
 
+loadCities();
 searchFormEl.addEventListener('submit', formSubmitHandler);
+previousSearchesEl.addEventListener('click', buttonClickHandler);
