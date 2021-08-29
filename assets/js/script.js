@@ -65,13 +65,13 @@ var displayCurrentWeather = function(data, city) {
     var date = (today.getMonth() + 1) + '/' + 
         today.getDate() + '/' + 
         today.getFullYear();
-    var icon = data.weather[0].icon;
+    h2El.textContent = city + ' (' + date + ')  ';
 
     // Create weather icon to the right of h2
+    var icon = data.weather[0].icon;
     var imgEl = document.createElement('img')
     imgEl.classList = 'absolute-position';
     imgEl.setAttribute('src', 'http://openweathermap.org/img/w/' + icon + '.png')
-    h2El.textContent = city + ' (' + date + ')  ';
 
     // Create paragraphs for temperature, wind, humidity & uvi
     var tempEl = document.createElement('p')
@@ -128,6 +128,7 @@ var displayForecast = function(data) {
         var singleDayEl = document.createElement('article');
         singleDayEl.classList = 'col-2 p-10 dark-bg';
 
+        // Add date at the top of each card
         var x = new Date(data[i].dt * 1000);
         var date = (x.getMonth() + 1) + '/' + 
             x.getDate() + '/' + 
@@ -136,7 +137,30 @@ var displayForecast = function(data) {
         h4El.textContent = date;
         h4El.classList = 'white-font';
 
+        // Add weather icon
+        var icon = data[i].weather[0].icon;
+        var imgEl = document.createElement('img')
+        imgEl.setAttribute('src', 'http://openweathermap.org/img/w/' + icon + '.png')
+        
+        // Create paragraphs for temperature, wind, humidity & uvi
+        var tempEl = document.createElement('p')
+        tempEl.innerHTML = 'Temp: ' + data[i].temp.day + ' <span>&#176;</span>F';
+        tempEl.classList = 'p-10-0 white-font lg-font-size';
+
+        var windEl = document.createElement('p')
+        windEl.textContent = 'Wind: ' + data[i].wind_speed + ' MPH';
+        windEl.classList = 'p-10-0 white-font lg-font-size';
+
+        var humidityEl = document.createElement('p')
+        humidityEl.textContent = 'Humidity: ' + data[i].humidity + ' %';
+        humidityEl.classList = 'p-10-0 white-font lg-font-size';
+
         singleDayEl.appendChild(h4El);
+        singleDayEl.appendChild(imgEl);
+        singleDayEl.appendChild(tempEl);
+        singleDayEl.appendChild(windEl);
+        singleDayEl.appendChild(humidityEl);
+
         daysContainerEl.appendChild(singleDayEl);
     }
 
