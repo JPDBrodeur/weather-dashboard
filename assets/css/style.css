@@ -78,13 +78,24 @@ header {
     flex: 0 0 calc(100% * 9 / 12);
 }
 
+.col-2 {
+    flex: 0 0 calc(100% * 2 / 12);
+}
+
 .p-10 {
     padding: 10px;
 }
 
-article {
+.dark-bg {
+    background-color: #33475A;
+}
+
+#results {
+    padding: 20px;
+}
+
+#current {
     border: 1px solid #000;
-    margin: 20px;
 }
 
 #city-name {
@@ -102,6 +113,10 @@ article {
 
 .p-10-0 {
     padding: 10px 0;
+}
+
+.m-10-0 {
+    margin: 10px 0;
 }
 
 #uvi {

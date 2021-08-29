@@ -55,6 +55,7 @@ var displayCurrentWeather = function(data, city) {
     
     // Create a container for current weather
     var currentWeatherEl = document.createElement('article');
+    currentWeatherEl.id = 'current';
     currentWeatherEl.classList = 'p-10';
 
     // Create h2 with name & date
@@ -109,6 +110,42 @@ var displayCurrentWeather = function(data, city) {
     } else {
         uviColorEl.classList = 'moderate';
     }
+}
+
+var displayForecast = function(data) {
+    console.log(data);
+    // Create a container for forecast
+    var forecastEl = document.createElement('div');
+
+    var h3El = document.createElement('h3');
+    h3El.textContent = '5-Day Forecast:';
+    h3El.classList = 'p-20-0-10-0';
+
+    var daysContainerEl = document.createElement('div');
+    daysContainerEl.classList = 'row space-between'
+
+    for (var i = 1; i < 6; i++) {
+        var singleDayEl = document.createElement('article');
+        singleDayEl.classList = 'col-2 p-10 dark-bg';
+
+        var x = new Date(data[i].dt * 1000);
+        var date = (x.getMonth() + 1) + '/' + 
+            x.getDate() + '/' + 
+            x.getFullYear(); 
+        var h4El = document.createElement('h4');
+        h4El.textContent = date;
+        h4El.classList = 'white-font';
+
+        singleDayEl.appendChild(h4El);
+        daysContainerEl.appendChild(singleDayEl);
+    }
+
+    // Append elements to current weather section
+    forecastEl.appendChild(h3El);
+    forecastEl.appendChild(daysContainerEl);
+    
+    // Append current weather section to results div
+    resultsContainerEl.appendChild(forecastEl);
 }
 
 searchFormEl.addEventListener('submit', formSubmitHandler);
