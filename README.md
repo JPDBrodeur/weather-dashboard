@@ -1,34 +1,30 @@
-# Weather Dashboard
+# Work Day Scheduler
 
-Foobar is a Python library for dealing with word pluralization.
+A weather dashboard which retrieves weather data for cities using the OpenWeather One Call API. 
+A Server-Side APIs Challenge
 
-## Installation
+## Deployed Application Link
+[https://jpdbrodeur.github.io/weather-dashboard/](https://jpdbrodeur.github.io/weather-dashboard/)
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+## Screenshot
+![View Screenshot](screenshot.png)
 
-```bash
-pip install foobar
-```
+## User Story
 
-## Usage
+AS A traveler  
+I WANT to see the weather outlook for multiple cities  
+SO THAT I can plan a trip accordingly  
 
-```python
-import foobar
+## Acceptance Criteria
 
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+GIVEN a weather dashboard with form inputs  
+WHEN I search for a city  
+THEN I am presented with current and future conditions for that city and that city is added to the search history  
+WHEN I view current weather conditions for that city  
+THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index  
+WHEN I view the UV index  
+THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe  
+WHEN I view future weather conditions for that city  
+THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity  
+WHEN I click on a city in the search history  
+THEN I am again presented with current and future conditions for that city  
