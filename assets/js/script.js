@@ -5,11 +5,15 @@ var resultsContainerEl = document.querySelector('#results');
 
 var loadCities = function() {
     var lastSearch = localStorage.getItem('last-search');
+    // If a search has been performed in this browser
     if (lastSearch) {
         var citiesArray = localStorage.getItem('citiesArray');
+        // And if a citiesArray exists in local storage
         if (citiesArray) {
+            // Create buttons based on the citiesArray
             citiesArray = JSON.parse(citiesArray);
             var existingButton;
+            // If the last search made is not an existing button, add it to the citiesArray
             for (var i = 0; i < citiesArray.length; i++) {
                 if (citiesArray[i] === lastSearch) {
                     existingButton = citiesArray[i];
@@ -19,12 +23,16 @@ var loadCities = function() {
             if (!existingButton) {
                 citiesArray.push(lastSearch)
             }
+        // If a citiesArray does NOT yet exist in local storage, create an array and add the last search
         } else { 
             citiesArray = [];
             citiesArray.push(lastSearch)
         }
+        // Store updated citiesArray in localStorage
         localStorage.setItem('citiesArray', JSON.stringify(citiesArray));
+        // Clear previous search buttons
         previousSearchesEl.textContent = '';
+        // Add back buttons based on updated array
         for (var i = 0; i < citiesArray.length; i++) {
             var cityBtn = document.createElement('button');
             cityBtn.textContent = citiesArray[i];
@@ -35,8 +43,8 @@ var loadCities = function() {
     }
 }
 
+// When search button is clicked
 var formSubmitHandler = function(event) {
-    // debugger;
     event.preventDefault();
     var city = cityInputEl.value.trim();
     if (city) {
@@ -47,6 +55,7 @@ var formSubmitHandler = function(event) {
     }
 };
 
+// When a previous search button is clicked
 var buttonClickHandler = function(event) {
     if (event.target.type === 'submit') {
         var city = event.target.textContent;
@@ -55,6 +64,7 @@ var buttonClickHandler = function(event) {
     }
 }
 
+// Get the latitude and longitude of each city and pass into the argument for getWeather()
 var getLatLon = function(city) {
     var apiKey = '0ea17125ef15498e647e96299b01656d';
     var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + apiKey;
@@ -78,6 +88,7 @@ var getLatLon = function(city) {
     });
 };
 
+// Get weather data for the current day and 5-Day Forecast
 var getWeather = function(lat, lon, city) {
     var apiKey = '0ea17125ef15498e647e96299b01656d';
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&units=imperial&appid=' + apiKey;
@@ -170,7 +181,7 @@ var displayForecast = function(data) {
 
     for (var i = 1; i < 6; i++) {
         var singleDayEl = document.createElement('article');
-        singleDayEl.classList = 'col-2 p-10 dark-bg';
+        singleDayEl.classList = 'col-5 col-xl-2 p-10 dark-bg mb-20';
 
         // Add date at the top of each card
         var x = new Date(data[i].dt * 1000);
@@ -216,6 +227,7 @@ var displayForecast = function(data) {
     resultsContainerEl.appendChild(forecastEl);
 }
 
+// Load buttons from previous search history on page load
 loadCities();
 searchFormEl.addEventListener('submit', formSubmitHandler);
 previousSearchesEl.addEventListener('click', buttonClickHandler);
