@@ -1,4 +1,4 @@
-# Work Day Scheduler
+# Weather Dashboard
 
 A weather dashboard which retrieves weather data for cities using the OpenWeather One Call API. 
 A Server-Side APIs Challenge
